@@ -2,12 +2,14 @@ package com.example.wsugooglemaps;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     FloatingActionButton fab;
     private FusedLocationProviderClient mLocationClient;
     private Object initMap;
+    private int GPS_REQUEST_CODE = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         checkMyPermission();
         if (isPermissionGrnted){
-            mapView.getMapAsync(this);
-            mapView.onCreate(savedInstanceState);
+            if(isGPSenable()) {
+                mapView.getMapAsync(this);
+                mapView.onCreate(savedInstanceState);
+            }
         }
 
         checkMyPermission();
@@ -76,9 +81,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private  void  initMap() {
-        if (isPermissionGrnted) {
-            SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+    }
+
+    private boolean isGPSenable() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        boolean providerEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (providerEnable) {
+            return true;
         }
+        else {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("GPS Permission")
+                    .setMessage ("GPS is required for this app to work. Please enable GPS")
+                    .setPositiveButton("yes", ((dialogInterface, i) -> {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivityForResult(intent, GPS_REQUEST_CODE);
+                    }))
+                    .setCancelable(false)
+                    .show();
+        }
+
+        return false;
     }
 
     @SuppressLint("MissingPermission")
@@ -128,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        //mGoogleMap.setMyLocationEnabled(true);
+        mGoogleMap.setMyLocationEnabled(true);
 
         LatLng wsu = new LatLng(42.35740456607535, -83.06532964687997);
         mGoogleMap.addMarker(new MarkerOptions().position(wsu).title("Marker at Wyne State University"));
@@ -191,5 +218,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GPS_REQUEST_CODE) {
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+            boolean providerEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+            if (providerEnable) {
+                Toast.makeText(this, "GPS is enable", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this, "GPS is not enable", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
