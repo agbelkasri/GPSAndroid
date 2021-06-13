@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -16,10 +18,13 @@ import android.os.LocaleList;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.internal.constants.ListAppsActivityContract;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -37,7 +42,10 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -48,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient mLocationClient;
     private Object initMap;
     private int GPS_REQUEST_CODE = 9001;
+    EditText locSearch;
+    ImageView searchIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
 
         fab = findViewById(R.id.fab);
+        locSearch = findViewById(R.id.et_search);
+        searchIcon = findViewById(R.id.search_icon);
 
         mapView = findViewById(R.id.map_view);
 
@@ -78,6 +90,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 getCurrentLoc();
             }
         });
+
+        searchIcon.setOnClickListener(this::geoLocate);
+    }
+
+    private void geoLocate(View view) {
+
+        String locationName = locSearch.getText().toString();
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> addressList = geocoder.getFromLocationName(locationName, 1);
+
+            if (addressList.size()>0) {
+                Address address = addressList.get(0);
+
+                gotoLocation(address.getLatitude(), address.getLongitude());
+
+                mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude())));
+
+                Toast.makeText(this, address.getLocality(), Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+
+        }
     }
 
     private  void  initMap() {
