@@ -50,14 +50,12 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     boolean isPermissionGrnted;
-    MapView mapView;
     GoogleMap mGoogleMap;
     FloatingActionButton fab;
     private FusedLocationProviderClient mLocationClient;
     private Object initMap;
     private int GPS_REQUEST_CODE = 9001;
-    EditText locSearch;
-    ImageView searchIcon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +63,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
 
         fab = findViewById(R.id.fab);
-        locSearch = findViewById(R.id.et_search);
-        searchIcon = findViewById(R.id.search_icon);
 
-        mapView = findViewById(R.id.map_view);
-
-        checkMyPermission();
-        if (isPermissionGrnted){
-            if(isGPSenable()) {
-                mapView.getMapAsync(this);
-                mapView.onCreate(savedInstanceState);
-            }
-        }
+        
 
         checkMyPermission();
 
@@ -91,33 +79,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        searchIcon.setOnClickListener(this::geoLocate);
+
     }
 
-    private void geoLocate(View view) {
 
-        String locationName = locSearch.getText().toString();
-
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            List<Address> addressList = geocoder.getFromLocationName(locationName, 1);
-
-            if (addressList.size()>0) {
-                Address address = addressList.get(0);
-
-                gotoLocation(address.getLatitude(), address.getLongitude());
-
-                mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude())));
-
-                Toast.makeText(this, address.getLocality(), Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-
-        }
-    }
 
     private  void  initMap() {
+        if (isPermissionGrnted){
+            if(isGPSenable()) {
+                SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+                supportMapFragment.getMapAsync(this);
+            }
+        }
 
     }
 
@@ -198,48 +171,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.addMarker(new MarkerOptions().position(wsu).title("Marker at Wyne State University"));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(wsu, 18));
 
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
     }
 
     @Override
