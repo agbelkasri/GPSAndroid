@@ -168,8 +168,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.setMyLocationEnabled(true);
 
         LatLng wsu = new LatLng(42.35740456607535, -83.06532964687997);
-        mGoogleMap.addMarker(new MarkerOptions().position(wsu).title("Marker at Wyne State University"));
+        mGoogleMap.addMarker(new MarkerOptions().position(wsu).title("Marker at Wayne State University"));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(wsu, 18));
+        LatLng physicsbuild = new LatLng(42.35400386604689, -83.06949827390679);
+        mGoogleMap.addMarker(new MarkerOptions().position(physicsbuild).title("Wayne State University Department of Physics and" +
+                "Astronomy"));
+        LatLng generalLec = new LatLng(42.35511182951506, -83.07211836611843);
+        mGoogleMap.addMarker(new MarkerOptions().position(generalLec).title("General Lectures"));
+        LatLng prentis = new LatLng(42.35801421215564, -83.06823415994502);
+        mGoogleMap.addMarker(new MarkerOptions().position(prentis).title("Prentis Building"));
+        LatLng DeRoyAud = new LatLng(42.35770959568507, -83.06863408283621);
+        mGoogleMap.addMarker(new MarkerOptions().position(DeRoyAud).title("DeRoy Auditorium"));
+        LatLng SciHall = new LatLng(42.35633548159699, -83.06742468849461);
+        mGoogleMap.addMarker(new MarkerOptions().position(SciHall).title("Science Hall"));
 
     }
 
