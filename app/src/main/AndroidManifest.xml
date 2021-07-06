@@ -13,11 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WSUGoogleMaps">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -31,7 +27,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDF6mpgqS3HJmm_nSj_HP0yeklruAJVYVw" />
+        <activity android:name=".SplashActivity" android:theme="@style/Theme.WSUGoogleMaps1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 
