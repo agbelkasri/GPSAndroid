@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_map_24" />
-                            <entry key="sourceFile" value="C:\Users\User\Documents\GitHub\GPSAndroid" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic__449671" />
+                            <entry key="sourceFile" value="C:\Users\User\Downloads\3449671.svg" />
                           </map>
                         </option>
                       </PersistentState>
