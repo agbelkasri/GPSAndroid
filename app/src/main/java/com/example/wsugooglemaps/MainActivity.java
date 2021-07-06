@@ -181,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.addMarker(new MarkerOptions().position(DeRoyAud).title("DeRoy Auditorium"));
         LatLng SciHall = new LatLng(42.35633548159699, -83.06742468849461);
         mGoogleMap.addMarker(new MarkerOptions().position(SciHall).title("Science Hall"));
+        LatLng lifesci = new LatLng(42.355811104191346, -83.06861066966165);
+        mGoogleMap.addMarker(new MarkerOptions().position(lifesci).title("Life Science Building"));
+
 
     }
 
