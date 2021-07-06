@@ -21,10 +21,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        Username = (EditText)findViewById(R.id.etUsername);
-        Pass = (EditText)findViewById(R.id.etPass);
-        Info = (TextView)findViewById(R.id.tvInfo);
-        Logon = (Button)findViewById(R.id.btnLogon);
+        /*/   // Username = (EditText)findViewById(R.id.etUsername);
+        // Pass = (EditText)findViewById(R.id.etPass);
+       //  Info = (TextView)findViewById(R.id.tvInfo);
+        // Logon = (Button)findViewById(R.id.btnLogon);*/
 
         Logon.setOnClickListener(new View.OnClickListener() {
             @Override
