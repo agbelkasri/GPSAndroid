@@ -167,8 +167,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap = googleMap;
         mGoogleMap.setMyLocationEnabled(true);
 
+        //Location marker for Wayne State University
         LatLng wsu = new LatLng(42.35740456607535, -83.06532964687997);
         mGoogleMap.addMarker(new MarkerOptions().position(wsu).title("Marker at Wayne State University"));
+        //Location marker for Wayne State University Department of Physics and Astronomy
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(wsu, 18));
         LatLng physicsbuild = new LatLng(42.35400386604689, -83.06949827390679);
         mGoogleMap.addMarker(new MarkerOptions().position(physicsbuild).title("Wayne State University Department of Physics and" +
@@ -183,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.addMarker(new MarkerOptions().position(SciHall).title("Science Hall"));
         LatLng lifesci = new LatLng(42.355811104191346, -83.06861066966165);
         mGoogleMap.addMarker(new MarkerOptions().position(lifesci).title("Life Science Building"));
+
 
 
     }
