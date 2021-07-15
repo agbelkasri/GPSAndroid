@@ -47,6 +47,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
+//please write code comments to make it readable 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     boolean isPermissionGrnted;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fab = findViewById(R.id.fab);
 
         
-
+        // what is the purpose of this function?
         checkMyPermission();
 
         initMap();
