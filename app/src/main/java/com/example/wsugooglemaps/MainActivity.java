@@ -176,14 +176,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng physicsbuild = new LatLng(42.35400386604689, -83.06949827390679);
         mGoogleMap.addMarker(new MarkerOptions().position(physicsbuild).title("Wayne State University Department of Physics and" +
                 "Astronomy"));
+        //Location marker for General Lectures building
         LatLng generalLec = new LatLng(42.35511182951506, -83.07211836611843);
         mGoogleMap.addMarker(new MarkerOptions().position(generalLec).title("General Lectures"));
+        //Location marker for Prentis Building
         LatLng prentis = new LatLng(42.35801421215564, -83.06823415994502);
         mGoogleMap.addMarker(new MarkerOptions().position(prentis).title("Prentis Building"));
+        //Location marker for DeRoy Auditorium
         LatLng DeRoyAud = new LatLng(42.35770959568507, -83.06863408283621);
         mGoogleMap.addMarker(new MarkerOptions().position(DeRoyAud).title("DeRoy Auditorium"));
+        //Locatoin marker for Science Hall
         LatLng SciHall = new LatLng(42.35633548159699, -83.06742468849461);
         mGoogleMap.addMarker(new MarkerOptions().position(SciHall).title("Science Hall"));
+        //Location marker for Life Science Building
         LatLng lifesci = new LatLng(42.355811104191346, -83.06861066966165);
         mGoogleMap.addMarker(new MarkerOptions().position(lifesci).title("Life Science Building"));
 
