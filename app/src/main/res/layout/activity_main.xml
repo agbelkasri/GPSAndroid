@@ -22,6 +22,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_marker_foreground"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintVertical_bias="1"
         android:layout_margin="16dp"
