@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Object initMap;
     private int GPS_REQUEST_CODE = 9001;
 
+    //EditText locSearch;
+    //ImageView searchIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         fab = findViewById(R.id.fab);
 
-        
+        //locSearch = findViewById(R.id.et_search);
+        //searchIcon = findViewById(R.id.search_icon);
+
         // what is the purpose of this function?
+        //to check/ ask for user permission to get their current location
         checkMyPermission();
 
         initMap();
@@ -80,10 +85,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+       // searchIcon.setOnClickListener(this::geoLocate);
 
     }
 
+    /*
+    private void geoLocate(View view) {
+        String locationName = locSearch.getText().toString();
 
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            List<Address> addressList = geocoder.getFromLocationName(locationName, 1);
+
+            if (addressList.size()>0) {
+                Address address = addressList.get(0);
+
+                gotoLocation(address.getLatitude(), address.getLongitude());
+
+                mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(address.getLatitude(), address.getLongitude())));
+
+                Toast.makeText(this, address.getLocality(), Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (IOException e) {
+
+        }
+    }
+     */
 
     private  void  initMap() {
         if (isPermissionGrnted){
